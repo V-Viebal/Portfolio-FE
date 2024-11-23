@@ -1,0 +1,31 @@
+@import './variables.scss';
+
+*:not(:hover):not(:active):not(:focus) {
+	&::-webkit-scrollbar,
+  &::-webkit-scrollbar-track {
+		background-color: transparent;
+	}
+
+  &::-webkit-scrollbar-thumb {
+	background-color: color(lightGray, 200);
+  }
+}
+
+::-webkit-scrollbar {
+	height: 10px;
+	width: 10px;
+	background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 4px;
+	background-color: color(lightGray, 300);
+
+	&:vertical {
+		min-height: 60px;
+	}
+
+	&:horizontal {
+		min-width: 60px;
+	}
+}

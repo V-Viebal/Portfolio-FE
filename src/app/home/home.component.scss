@@ -1,0 +1,15 @@
+.image {
+    text-align: center;
+}
+
+.description {
+	display: -webkit-box;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	min-height: 95px;
+}
+
+.cursor {
+	cursor: pointer;
+}

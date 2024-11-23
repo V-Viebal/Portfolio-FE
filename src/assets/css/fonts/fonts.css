@@ -1,0 +1,22 @@
+@font-face {
+	font-family: "Inter";
+	font-weight: 100 900;
+	font-display: swap;
+	font-style: oblique 0deg 10deg;
+	src: url(./Inter.woff2)format("woff2")
+}
+
+@font-face {
+	font-family: "Ndot";
+	font-weight: 400;
+	font-display: swap;
+	src: url(./Ndot-55.woff2)format("woff2")
+}
+
+@font-face {
+	font-family: "Geist";
+	font-weight: 100 900;
+	font-display: swap;
+	font-style: oblique 0deg 10deg;
+	src: url(./GeistMonoVF.woff2)format("woff2")
+}
