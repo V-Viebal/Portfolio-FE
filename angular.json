@@ -84,27 +84,21 @@
 						},
 						"main": "server.ts",
 						"stylePreprocessorOptions": {
-							"includePaths": [
-								""
-							]
+							"includePaths": [""]
 						},
 						"tsConfig": "tsconfig.server.json",
 						"optimization": false,
 						"sourceMap": true,
-						"namedChunks": true,
-						"vendorChunk": true,
 						"extractLicenses": false,
-						"buildOptimizer": false,
 						"statsJson": false,
 						"inlineStyleLanguage": "scss"
 					},
 					"configurations": {
 						"production": {
-							"optimization": true,
+							"optimization": false,
 							"sourceMap": false,
 							"namedChunks": false,
 							"extractLicenses": true,
-							"buildOptimizer": true,
 							"outputPath": "dist/production/server"
 						},
 						"development": {
@@ -114,24 +108,6 @@
 									"with": "src/environments/environment.development.ts"
 								}
 							]
-						}
-					}
-				},
-				"serve-ssr": {
-					"builder": "@angular-devkit/build-angular:ssr-dev-server",
-					"options": {
-						"host": "0.0.0.0",
-						"port": 8888,
-						"open": true
-					},
-					"configurations": {
-						"development": {
-							"browserTarget": "web:build:development",
-							"serverTarget": "web:server:development"
-						},
-						"production": {
-							"browserTarget": "web:build:production",
-							"serverTarget": "web:server:production"
 						}
 					}
 				},
