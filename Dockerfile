@@ -27,8 +27,8 @@ RUN mkdir -p /var/lib/nginx /usr/share/nginx/html /etc/nginx/modules && \
     chown -R nginx:nginx /var/lib/nginx
 
 # Copy built application files from the build stage
-COPY --from=build-web /app/dist/web/browser /usr/share/nginx/html
-COPY --from=build-web /app/dist/web/server /app/dist/web/server
+COPY --from=build-web /app/dist/compressed/browser /usr/share/nginx/html
+COPY --from=build-web /app/dist/compressed/server /app/dist/web/server
 COPY --from=build-web /app/package.json /app/
 
 # Install production dependencies for Node.js server
