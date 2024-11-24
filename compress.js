@@ -2,8 +2,8 @@ const fs = require( 'fs' );
 const path = require( 'path' );
 const zlib = require( 'zlib' );
 
-const sourceDir = path.resolve( __dirname, 'dist/production' );
-const outputDir = path.resolve( __dirname, 'dist/compressed' );
+const sourceDir = path.resolve( __dirname, 'dist/production/browser' );
+const outputDir = path.resolve( __dirname, 'dist/compressed/browser' );
 
 function compressFile( inputFilePath, outputFilePath ) {
 	const brotli = zlib.createBrotliCompress();

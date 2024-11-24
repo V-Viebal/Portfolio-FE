@@ -64,7 +64,7 @@ COPY --from=build-nginx /usr/src/nginx-1.24.0/objs/ngx_http_brotli_static_module
 
 # Copy built application files from the build stage
 COPY --from=build-web /app/dist/compressed/browser /usr/share/nginx/html
-COPY --from=build-web /app/dist/compressed/server /app/dist/web/server
+COPY --from=build-web /app/dist/web/server /app/dist/web/server
 COPY --from=build-web /app/package.json /app/
 
 # Install production dependencies for Node.js server
