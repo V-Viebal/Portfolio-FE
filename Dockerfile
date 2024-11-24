@@ -42,4 +42,4 @@ COPY ./nginx.conf /etc/nginx/nginx.conf
 EXPOSE 80
 
 # Run both Nginx and Node.js
-CMD ["/bin/sh", "-c", "/usr/local/nginx/sbin/nginx && node /app/dist/web/server/main.js"]
+CMD ["/bin/sh", "-c", "nginx && node /app/dist/web/server/main.js"]
