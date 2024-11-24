@@ -11,9 +11,10 @@
 		"build-prod": "ng build --configuration production && node compress.js",
 		"build:ssr": "ng build --configuration development && ng run web:server:development",
 		"build:ssr:production": "ng build --configuration production && ng run web:server:production",
-		"serve:ssr": "ng run web:serve-ssr:development",
+		"serve:ssr": "node dist/web/server/main.js",
 		"prerender": "ng run web:prerender:development",
-		"prerender:production": "ng run web:prerender:production"
+		"prerender:production": "ng run web:prerender:production",
+		"build-and-serve-ssr": "npm run build:ssr && npm run prerender && npm run serve:ssr"
 	},
 	"private": true,
 	"dependencies": {
