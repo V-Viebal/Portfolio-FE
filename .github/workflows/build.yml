@@ -62,15 +62,15 @@ jobs:
     - uses: actions/checkout@v4
       name: Checkout code
 
-    - uses: actions/cache@v4
-      name: Cache NPM dependencies
-      with: 
-       path: |
-          ~/.npm
-          node_modules
-       key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-       restore-keys: |
-          ${{ runner.os }}-node-
+    # - uses: actions/cache@v4
+    #   name: Cache NPM dependencies
+    #   with: 
+    #    path: |
+    #       ~/.npm
+    #       node_modules
+    #    key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+    #    restore-keys: |
+    #       ${{ runner.os }}-node-
 
     - name: Build Angular Docker Image
       if: ${{ inputs.build-artifacts == true }}
