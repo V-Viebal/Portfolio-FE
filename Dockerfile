@@ -74,8 +74,8 @@ RUN npm install --only=production
 # Copy Nginx configuration
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
-# Expose port 80
-EXPOSE 80
+# Expose port 80 for Nginx and 4000 for Node.js
+EXPOSE 80 4000
 
 # Run both Nginx and Node.js server
 CMD ["/bin/sh", "-c", "nginx -g 'daemon off;' & node /app/dist/production/server/main.js"]
