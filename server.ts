@@ -7,6 +7,7 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { AppServerModule } from 'main.server';
 import * as dotenv from 'dotenv';
+import compression from 'compression';
 
 // Load environment variables from the .env file
 dotenv.config();
@@ -25,6 +26,9 @@ export function app(): express.Express {
 
 	server.set('view engine', 'html');
 	server.set('views', distFolder);
+
+	// Use Gzip compression for all HTTP responses
+	server.use(compression());
 
 	// Serve static files from /browser
 	server.get('*.*', express.static(distFolder, { maxAge: '1y' }));
