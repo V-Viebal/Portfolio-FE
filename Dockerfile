@@ -64,7 +64,7 @@ COPY --from=build-nginx /usr/src/nginx-1.24.0/objs/ngx_http_brotli_static_module
 
 # Copy built application files from the build stage
 COPY --from=build-web /app/dist/compressed/browser /usr/share/nginx/html
-COPY --from=build-web /app/dist/web/server /app/dist/web/server
+COPY --from=build-web /app/dist/production/server /app/dist/production/server
 COPY --from=build-web /app/package.json /app/
 
 # Install production dependencies for Node.js server
@@ -78,4 +78,4 @@ COPY ./nginx.conf /etc/nginx/nginx.conf
 EXPOSE 80
 
 # Run both Nginx and Node.js server
-CMD ["/bin/sh", "-c", "nginx -g 'daemon off;' & node /app/dist/web/server/main.js"]
+CMD ["/bin/sh", "-c", "nginx -g 'daemon off;' & node /app/dist/production/server/main.js"]
