@@ -35,7 +35,7 @@ COPY --from=build-web /app/package.json /app/
 WORKDIR /app
 
 # Install production dependencies in a single layer for optimization
-RUN npm ci --only=production
+RUN npm i --only=production && npm cache clean --force
 
 # Copy Nginx configuration
 COPY ./nginx.conf /etc/nginx/nginx.conf
