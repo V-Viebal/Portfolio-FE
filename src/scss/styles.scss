@@ -778,7 +778,10 @@ figcaption {
 	--c-accent: hsl(0, 100%, 50%);
 	--c-bg-img: hsl(0, 0%, 95%);
 	--grid-column: 25rem;
-	background: var(--c-bg)
+	background: var(--c-bg);
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
 }
 
 @media (min-width:1200px) {
@@ -810,12 +813,13 @@ figcaption {
 	padding: 0;
 	position: relative;
 	max-width: 90rem;
-	border-top: none
+	border-top: none;
 }
 
 @media (min-width:1800px) {
 	#lab body {
-		border-right: 1px dotted var(--c-borders)
+		border-right: 1px dotted var(--c-borders);
+		border-left: 1px dotted var(--c-borders);
 	}
 }
 

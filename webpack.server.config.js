@@ -2,6 +2,7 @@ const path = require('path');
 const dotenv = require('dotenv-webpack');
 
 module.exports = {
+  target: "node",
 	module: {
 		rules: [
 			{

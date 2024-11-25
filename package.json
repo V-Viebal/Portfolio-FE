@@ -11,10 +11,11 @@
 		"build-prod": "ng build --configuration production && node compress.js",
 		"build:ssr": "ng build --configuration development && ng run web:server:development",
 		"build:ssr:production": "ng build --configuration production && ng run web:server:production",
-		"serve:ssr": "node dist/web/server/main.js",
 		"prerender": "ng run web:prerender:development",
 		"prerender:production": "ng run web:prerender:production",
-		"build-and-serve-ssr": "npm run build:ssr && npm run prerender && npm run serve:ssr"
+		"serve": "ng serve --host localhost --configuration=development",
+		"serve:ssr": "ng run web:serve-ssr",
+		"build-prender-serve-ssr": "npm run build:ssr && npm run prerender && node dist/web/server/main.js"
 	},
 	"private": true,
 	"dependencies": {
@@ -55,6 +56,7 @@
 		"@webdiscus/pug-loader": "^2.11.0",
 		"browser-sync": "^3.0.0",
 		"dotenv": "^16.4.5",
+		"dotenv-webpack": "^8.1.0",
 		"jasmine-core": "~4.6.0",
 		"karma": "~6.4.0",
 		"karma-chrome-launcher": "~3.2.0",
@@ -65,7 +67,9 @@
 		"pug-lint": "^2.7.0",
 		"pug-lint-config-clock": "^2.0.0",
 		"pug-plugin-ng": "^0.0.3",
+		"ts-loader": "^9.5.1",
 		"typescript": "^5.4.5",
-		"ulidx": "^2.2.1"
+		"ulidx": "^2.2.1",
+		"webpack-node-externals": "^3.0.0"
 	}
 }

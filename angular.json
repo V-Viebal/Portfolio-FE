@@ -23,9 +23,7 @@
 						"outputPath": "dist/web/browser",
 						"index": "src/index.html",
 						"main": "src/main.ts",
-						"polyfills": [
-							"zone.js"
-						],
+						"polyfills": ["zone.js"],
 						"tsConfig": "./tsconfig.app.json",
 						"inlineStyleLanguage": "scss",
 						"aot": false,
@@ -47,8 +45,11 @@
 							"src/scss/styles.scss",
 							"src/scss/libs.scss"
 						],
-						"scripts": [
-							"src/assets/js/font-preload.js"
+						"allowedCommonJsDependencies": [
+							"core-js/es/array",
+							"core-js/es/promise",
+							"core-js/es/reflect",
+							"zone.js"
 						]
 					},
 					"configurations": {
@@ -80,7 +81,7 @@
 					"options": {
 						"outputPath": "dist/web/server",
 						"customWebpackConfig": {
-							"path": "webpack.config.js"
+							"path": "webpack.server.config.js"
 						},
 						"main": "server.ts",
 						"stylePreprocessorOptions": {
@@ -91,7 +92,10 @@
 						"sourceMap": true,
 						"extractLicenses": false,
 						"statsJson": false,
-						"inlineStyleLanguage": "scss"
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"src/assets"
+						]
 					},
 					"configurations": {
 						"production": {
@@ -146,6 +150,27 @@
 						},
 						"aot": {
 							"buildTarget": "web:build:aot"
+						}
+					},
+					"defaultConfiguration": "development"
+				},
+				"serve-ssr": {
+					"builder": "@angular-devkit/build-angular:ssr-dev-server",
+					"options": {
+						"browserTarget": "web:build",
+						"serverTarget": "web:server",
+						"host": "0.0.0.0",
+						"port": 8080,
+						"open": true
+					},
+					"configurations": {
+						"production": {
+							"browserTarget": "web:build:production",
+							"serverTarget": "web:server:production"
+						},
+						"development": {
+							"browserTarget": "web:build:development",
+							"serverTarget": "web:server:development"
 						}
 					},
 					"defaultConfiguration": "development"

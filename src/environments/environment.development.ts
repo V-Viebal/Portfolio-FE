@@ -1,8 +1,3 @@
-import * as dotenv from 'dotenv';
-
-// Load environment variables from .env file
-dotenv.config();
-
 export const ENVIRONMENT = {
     PRODUCTION: process.env.NODE_ENV === 'production',
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID || '',
