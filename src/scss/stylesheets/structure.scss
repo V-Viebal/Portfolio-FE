@@ -1,8 +1,14 @@
-@import './variables.scss';
-
-html,
 body {
+	display: flex;
+	flex-direction: column;
 	height: 100%;
+	overflow-x: hidden !important;
+	// overflow-y: hidden !important;
 	margin: 0;
-	background-size: cover;
+
+	app {
+		display: flex;
+		flex-direction: column;
+		flex: 1 1 0%;
+	}
 }
