@@ -8,6 +8,8 @@ services:
           - .env
         environment:
           - ENV_NAME=${ENV_NAME}
+        volumes:
+          - .env:/app/.env:ro # Bind the .env file to the container
         networks: # REQUIRED: Should be 'public' to join into docker swarm.
           - public
         ports:
