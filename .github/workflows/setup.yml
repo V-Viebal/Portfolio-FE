@@ -88,19 +88,14 @@ jobs:
           # Set environment-specific variables
           variables_to_set=(
             "ENV_NAME=$env"
-            "SERVICE_NAME="
-            "SERVICE_DOMAIN="
-            "SERVICE_PORT="
+            "SERVICE_NAME= "
+            "SERVICE_DOMAIN= "
+            "SERVICE_PORT= "
           )
           
           for variable in "${variables_to_set[@]}"; do
               variable_name=$(echo "$variable" | cut -d '=' -f 1)
               variable_value=$(echo "$variable" | cut -d '=' -f 2)
-              
-              # Ensure variable_value is explicitly set to empty if not provided
-              if [ -z "$variable_value" ]; then
-                variable_value=""
-              fi
               
               # Set the variable for the environment
               echo "Setting variable '$variable_name' for environment $env"
