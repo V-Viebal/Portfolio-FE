@@ -14,7 +14,7 @@ RUN npm ci
 COPY . .
 
 # Build the application (SSR and Prerender)
-RUN npm run build:ssr:production
+RUN npm run build:ssr:production && npm run prerender:production
 
 # Stage 2: Production Stage for Unified Node.js and Nginx Container
 FROM alpine:3.18
