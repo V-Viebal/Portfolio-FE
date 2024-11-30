@@ -7,12 +7,16 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { AppServerModule } from 'main.server';
 import compression from 'compression';
-import { ENVIRONMENT } from './src/environments/environment';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
 	const server = express();
-	const distFolder = join(process.cwd(), ENVIRONMENT.PRODUCTION ? 'dist/production/browser' : 'dist/web/browser');
+	const distFolder = join(process.cwd(), isProduction ? 'dist/production/browser' : 'dist/web/browser');
 	const indexHtml = existsSync(join(distFolder, 'index.original.html'))
 		? join(distFolder, 'index.original.html')
 		: join(distFolder, 'index.html');
