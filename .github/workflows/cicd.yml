@@ -37,3 +37,11 @@ jobs:
     with:
       environment: ${{ needs.set-environment-name.outputs.environment }}
       build-artifacts: true
+      
+  deploy:
+    needs: [ set-environment-name, build ]
+    uses: ./.github/workflows/deploy.yml
+    secrets: inherit
+    with:
+      environment: ${{ needs.set-environment-name.outputs.environment }}
+      build-tag: ${{ needs.build.outputs.build-tag }}

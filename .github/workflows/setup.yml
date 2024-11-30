@@ -7,6 +7,11 @@ on:
         description: 'Fine-Grained Personal Access Token for GitHub'
         required: true
         type: string
+      APP_PATH:
+        description: 'The main folder to store config,...'
+        required: false
+        default: '/home/ubuntu'
+        type: string
       DOCKER_USERNAME:
         description: 'Default Docker Hub Username'
         required: false
@@ -55,6 +60,10 @@ jobs:
         echo "DOCKER_REPO: ${{ github.event.inputs.DOCKER_REPO }}"
 
         # Set global variables (not environment-specific)
+        gh secret set APP_PATH \
+          --repo "$ORGANIZATION/$REPO_NAME" \
+          --body "${{ github.event.inputs.APP_PATH }}"
+          
         gh secret set DOCKER_USERNAME \
           --repo "$ORGANIZATION/$REPO_NAME" \
           --body "${{ github.event.inputs.DOCKER_USERNAME }}"
@@ -79,23 +88,39 @@ jobs:
           # Set environment-specific variables
           variables_to_set=(
             "ENV_NAME=$env"
+            "SERVICE_NAME=portfolio"
+            "SERVICE_DOMAIN=portfolio.viebal.top"
+            "SERVICE_PORT=4000"
+            "DOCKER_FILE_PORT=80"
           )
-
+          
           for variable in "${variables_to_set[@]}"; do
-            variable_name=$(echo $variable | cut -d '=' -f 1)
-            variable_value=$(echo $variable | cut -d '=' -f 2)
-
-            # Check if variable exists before setting (for idempotency)
-            if gh variable list --repo "$ORGANIZATION/$REPO_NAME" | grep -q "$variable_name"; then
-              echo "Variable '$variable_name' already exists, skipping creation."
-            else
+              variable_name=$(echo "$variable" | cut -d '=' -f 1)
+              variable_value=$(echo "$variable" | cut -d '=' -f 2)
+              
+              # Set the variable for the environment
               echo "Setting variable '$variable_name' for environment $env"
-              gh variable set $variable_name \
-                --env $env \
+              gh variable set "$variable_name" \
+                --env "$env" \
                 --repo "$ORGANIZATION/$REPO_NAME" \
                 --body "$variable_value"
-            fi
           done
+
+          # for variable in "${variables_to_set[@]}"; do
+            # variable_name=$(echo $variable | cut -d '=' -f 1)
+            # variable_value=$(echo $variable | cut -d '=' -f 2)
+
+            # # Check if variable exists before setting (for idempotency)
+            # if gh variable list --repo "$ORGANIZATION/$REPO_NAME" | grep -q "$variable_name"; then
+              # echo "Variable '$variable_name' already exists, skipping creation."
+            # else
+              # echo "Setting variable '$variable_name' for environment $env"
+              # gh variable set $variable_name \
+                # --env $env \
+                # --repo "$ORGANIZATION/$REPO_NAME" \
+                # --body "$variable_value"
+            # fi
+          # done
         done
 
     - name: Done

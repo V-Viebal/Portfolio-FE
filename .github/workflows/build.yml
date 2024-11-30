@@ -33,8 +33,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment:
-      name: ${{ inputs.environment }}
+    environment: ${{ inputs.environment }}
     outputs:
       build-tag: ${{ steps.set_tag.outputs.build-tag }} # Set output for webTag at the job level
     steps:
