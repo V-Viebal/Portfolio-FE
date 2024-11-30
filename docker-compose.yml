@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+    web:
+        image: "${DOCKER_REGISTRY}:${WEB_TAG}"
+        container_name: "${WEB_CONTAINER}"
+        environment:
+        - ENV_NAME=${ENV_NAME}
+        networks: # REQUIRED: Should be 'public' to join into docker swarm.
+        - public
+        deploy:
+          mode: replicated
+          replicas: 1
+          placement:
+            constraints: 
+              - node.platform.os == linux
+          labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.${WEB_CONTAINER}.rule=Host(`${WEB_CONTAINER}.yourdomain.com`)"
+            - "traefik.http.routers.${WEB_CONTAINER}.entrypoints=websecure" # Can be 'web' to refer http instead.
+            - "traefik.http.services.${WEB_CONTAINER}.loadbalancer.server.port=${WEB_PORT}"
+            
+networks:
+  public:
+    external: true
