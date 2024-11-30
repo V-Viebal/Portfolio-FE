@@ -5,7 +5,8 @@ services:
         image: "${DOCKER_USERNAME}/${DOCKER_REPO}:${BUILD_TAG}"
         container_name: "${SERVICE_NAME}"
         env_file:
-          - .env
+          - path: ./.env
+            required: true
         environment:
           - ENV_NAME=${ENV_NAME}
         networks: # REQUIRED: Should be 'public' to join into docker swarm.
