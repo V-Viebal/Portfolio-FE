@@ -14,7 +14,7 @@ RUN npm ci
 COPY . .
 
 # Build the application (SSR and Prerender)
-RUN npm run build:ssr:production && npm run prerender:production
+RUN npm run build:ssr:production
 
 # Stage 2: Production Stage for Unified Node.js and Nginx Container
 FROM alpine:3.18
@@ -33,6 +33,7 @@ COPY --from=build-web /app/package.json /app/
 
 # Set the working directory for Node.js
 WORKDIR /app
+
 
 # Install production dependencies in a single layer for optimization
 RUN npm i --only=production && npm cache clean --force
