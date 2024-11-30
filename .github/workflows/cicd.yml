@@ -30,18 +30,18 @@ jobs:
             ENV_NAME="dev"
           fi
           echo "environment=${ENV_NAME}" >> $GITHUB_OUTPUT
-  # build:
-    # needs: [set-environment-name]
-    # uses: ./.github/workflows/build.yml
-    # secrets: inherit
-    # with:
-      # environment: ${{ needs.set-environment-name.outputs.environment }}
-      # build-artifacts: true
+  build:
+    needs: [set-environment-name]
+    uses: ./.github/workflows/build.yml
+    secrets: inherit
+    with:
+      environment: ${{ needs.set-environment-name.outputs.environment }}
+      build-artifacts: true
       
   deploy:
-    needs: [ set-environment-name ]
+    needs: [ set-environment-name, build ]
     uses: ./.github/workflows/deploy.yml
     secrets: inherit
     with:
       environment: ${{ needs.set-environment-name.outputs.environment }}
-      build-tag: prod-latest
+      build-tag: ${{ needs.build.outputs.build-tag }}
