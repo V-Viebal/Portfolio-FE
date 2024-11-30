@@ -66,6 +66,7 @@ jobs:
         touch $ENV_CONFIG
         
         echo "APP_PATH=${{ secrets.APP_PATH }}" >> $ENV_CONFIG
+        echo "ENV_CONFIG=$ENV_CONFIG" >> $ENV_CONFIG
         echo "ENV_NAME=${{ inputs.environment }}" >> $ENV_CONFIG
         echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" >> $ENV_CONFIG
         echo "DOCKER_REPO=${{ secrets.DOCKER_REPO }}" >> $ENV_CONFIG
@@ -156,9 +157,6 @@ jobs:
           
     - name: Set up environment variables for Docker Compose
       run: |
-        rm -rf .env
-        touch .env
-        chmod 777 .env
         echo "NODE_ENV=production" >> .env
         echo "GOOGLE_CLIENT_ID=your-google-client-id" >> .env
         echo "FIREBASE_API_KEY=your-firebase-api-key" >> .env
@@ -179,4 +177,5 @@ jobs:
             echo "No running stack found for $SERVICE_NAME. Skipping removal."
         fi
         echo "Deploying stack: $SERVICE_NAME"
-        docker stack deploy $SERVICE_NAME -c docker-compose.yml
+        docker compose -f docker-compose.yml --env-file $ENV_CONFIG config | 
+        docker stack deploy -c - $SERVICE_NAME
