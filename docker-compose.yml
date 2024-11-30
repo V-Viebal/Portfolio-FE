@@ -1,13 +1,15 @@
 version: '3.8'
 
 services:
-    portfolio:
-        image: "${DOCKER_REGISTRY}:${WEB_TAG}"
-        container_name: "${WEB_CONTAINER}"
+    service:
+        image: "${DOCKER_USERNAME}/${DOCKER_REPO}:${BUILD_TAG}"
+        container_name: "${SERVICE_NAME}"
         environment:
-        - ENV_NAME=${ENV_NAME}
+          - ENV_NAME=${ENV_NAME}
         networks: # REQUIRED: Should be 'public' to join into docker swarm.
-        - public
+          - public
+        ports:
+          - "${SERVICE_PORT}:${DOCKER_FILE_PORT}"
         deploy:
           mode: replicated
           replicas: 1
@@ -16,11 +18,11 @@ services:
               - node.platform.os == linux
           labels:
             - "traefik.enable=true"
-            - "traefik.http.routers.${WEB_CONTAINER}.rule=Host(`${WEB_CONTAINER}.yourdomain.com`)"
-            - "traefik.http.routers.${WEB_CONTAINER}.entrypoints=websecure" # Can be 'web' to refer http instead.
-            - "traefik.http.services.${WEB_CONTAINER}.loadbalancer.server.port=${WEB_PORT}"
-         env_file:
-          - .env
+            - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
+            - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure" # Can be 'web' to refer http instead.
+            - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=${SERVICE_PORT}"
+            - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
+            - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=leresolver"
             
 networks:
   public:

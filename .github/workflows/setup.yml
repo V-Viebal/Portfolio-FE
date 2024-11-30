@@ -88,9 +88,10 @@ jobs:
           # Set environment-specific variables
           variables_to_set=(
             "ENV_NAME=$env"
-            "SERVICE_NAME= "
-            "SERVICE_DOMAIN= "
-            "SERVICE_PORT= "
+            "SERVICE_NAME=portfolio"
+            "SERVICE_DOMAIN=portfolio.viebal.top"
+            "SERVICE_PORT=4000"
+            "DOCKER_FILE_PORT=80"
           )
           
           for variable in "${variables_to_set[@]}"; do
