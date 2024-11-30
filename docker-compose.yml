@@ -4,16 +4,10 @@ services:
     service:
         image: "${DOCKER_USERNAME}/${DOCKER_REPO}:${BUILD_TAG}"
         container_name: "${SERVICE_NAME}"
+        env_file:
+          - .env
         environment:
           - ENV_NAME=${ENV_NAME}
-          - NODE_ENV=production
-          - GOOGLE_CLIENT_ID=your-google-client-id
-          - FIREBASE_API_KEY=your-firebase-api-key
-          - FIREBASE_AUTH_DOMAIN=web.firebaseapp.com
-          - FIREBASE_PROJECT_ID=web
-          - FIREBASE_STORAGE_BUCKET=web.appspot.com
-          - FIREBASE_MESSAGING_SENDER_ID=your-firebase-messaging-sender-id
-          - FIREBASE_APP_ID=your-firebase-app-id
         networks: # REQUIRED: Should be 'public' to join into docker swarm.
           - public
         ports:
