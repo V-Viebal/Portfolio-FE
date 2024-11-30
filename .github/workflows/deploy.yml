@@ -177,5 +177,4 @@ jobs:
             echo "No running stack found for $SERVICE_NAME. Skipping removal."
         fi
         echo "Deploying stack: $SERVICE_NAME"
-        docker compose -f docker-compose.yml --env-file $ENV_CONFIG config | 
-        docker stack deploy -c - $SERVICE_NAME
+        docker stack deploy $SERVICE_NAME -c docker-compose.yml
