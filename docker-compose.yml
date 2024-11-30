@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-    web:
+    portfolio:
         image: "${DOCKER_REGISTRY}:${WEB_TAG}"
         container_name: "${WEB_CONTAINER}"
         environment:
@@ -19,6 +19,8 @@ services:
             - "traefik.http.routers.${WEB_CONTAINER}.rule=Host(`${WEB_CONTAINER}.yourdomain.com`)"
             - "traefik.http.routers.${WEB_CONTAINER}.entrypoints=websecure" # Can be 'web' to refer http instead.
             - "traefik.http.services.${WEB_CONTAINER}.loadbalancer.server.port=${WEB_PORT}"
+         env_file:
+          - .env
             
 networks:
   public:
