@@ -12,8 +12,6 @@ services:
           - .env:/app/.env:ro # Bind the .env file to the container
         networks: # REQUIRED: Should be 'public' to join into docker swarm.
           - public
-        ports:
-          - "${SERVICE_PORT}:${DOCKER_FILE_PORT}"
         deploy:
           mode: replicated
           replicas: 1
