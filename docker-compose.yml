@@ -20,6 +20,7 @@ services:
           placement:
             constraints: 
               - node.platform.os == linux
+              - node.role == worker
           labels:
             - "traefik.enable=true"
             - "traefik.docker.network=public"
