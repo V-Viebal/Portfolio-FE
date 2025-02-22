@@ -13,7 +13,6 @@
 		"build:ssr:production": "ng build --configuration production && ng run web:server:production",
 		"prerender": "ng run web:prerender:development",
 		"prerender:production": "ng run web:prerender:production",
-		"serve": "ng serve --host localhost --configuration=development",
 		"serve:ssr": "ng run web:serve-ssr",
 		"build-prender-serve-ssr": "npm run build:ssr && npm run prerender && node dist/web/server/main.js"
 	},
